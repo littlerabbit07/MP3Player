@@ -42,11 +42,16 @@ body::after {
     padding: 5px 10px;
     cursor: pointer;
     font-family: 'Courier New', monospace;
+    transition: 0.2s;
+    box-shadow: 0 0 0px #00FF00;
 }
 
 .controls button:hover {
-    background: #002200;
+    background: black;
+    color: #00FF00;
+    box-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00, 0 0 30px #00FF00;
 }
+
 
 .playlist-area {
     width: 300px;

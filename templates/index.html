@@ -8,17 +8,26 @@
 <body>
 <div class="container">
 
-  <div class="player-area">
-    <h1>🎵 CRT Player</h1>
-    <div id="current-track">Select a song...</div>
-    <div class="controls">
-      <button id="prev">⏮️ Prev</button>
-      <button id="play">▶️ Play</button>
-      <button id="pause">⏸️ Pause</button>
-      <button id="next">⏭️ Next</button>
-    </div>
+  <!-- ASCII Cassette Animation -->
+  <pre id="ascii-cassette" style="font-family: monospace; font-size: 13px; line-height: 1; margin-bottom: 10px;"></pre>
+
+  <div class="controls">
+    <button id="prev">[<<] Prev</button>
+    <button id="play">[>] Play</button>
+    <button id="pause">[||] Pause</button>
+    <button id="next">[>>] Next</button>
   </div>
 
+<div class="track-list">
+  {% for track in tracks %}
+    <div class="track" data-src="{{ url_for('music', filename=track) }}">
+      [♫] {{ track }}
+    </div>
+  {% endfor %}
+</div>
+    <div class="now-playing">
+        <h2>Now Playing:</h2>
+        <p id="current-track">Select a track to play</p>    
   <div class="playlist-area">
     <input type="text" id="search" placeholder="Search songs...">
     <div class="track-list">
@@ -34,5 +43,49 @@
 
 <audio id="audio" controls style="display:none;"></audio>
 <script src="{{ url_for('static', filename='js/player.js') }}"></script>
+<script src="{{ url_for('static', filename='js/player.js') }}"></script>
+<!-- Place your cassette animation script here or in a separate JS file -->
+<script>
+(function () {
+  const el = document.getElementById('ascii-cassette');
+  if (!el) return;
+
+  const spokes = ['|', '/', '-', '\\'];
+  let t = 0;
+  const tapeLength = 18;
+  let shuttlePos = 0;
+
+  function frame(i) {
+    const L = spokes[i % 4];
+    const R = spokes[(4 - (i % 4)) % 4];
+
+    let tape = Array(tapeLength).fill('=');
+    const shuttle = '====>';
+    tape.fill(' ', shuttlePos, shuttlePos + shuttle.length);
+    for (let j = 0; j < shuttle.length; j++) {
+      if (shuttlePos + j < tape.length) tape[shuttlePos + j] = shuttle[j];
+    }
+    shuttlePos = (shuttlePos + 1) % (tapeLength - shuttle.length + 1);
+
+    const lines = [
+      "+------------------------------+",
+      "| .--------------------------. |",
+      "| |   (  " + L + "  )  (  " + R + "  )     | |",
+      "| |   [" + tape.join('') + "]   | |",
+      "| |                          | |",
+      "| '--------------------------' |",
+      "+------------------------------+"
+    ];
+    return lines.join("\n");
+  }
+
+  function tick() {
+    el.textContent = frame(t++);
+  }
+
+  tick();
+  setInterval(tick, 150);
+})();
+</script>
 </body>
 </html>
