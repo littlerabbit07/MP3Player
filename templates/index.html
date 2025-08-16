@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CRT MP3 Player</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+
+  <div class="player-area">
+    <h1>🎵 CRT Player</h1>
+    <div id="current-track">Select a song...</div>
+    <div class="controls">
+      <button id="prev">⏮️ Prev</button>
+      <button id="play">▶️ Play</button>
+      <button id="pause">⏸️ Pause</button>
+      <button id="next">⏭️ Next</button>
+    </div>
+  </div>
+
+  <div class="playlist-area">
+    <input type="text" id="search" placeholder="Search songs...">
+    <div class="track-list">
+      {% for track in tracks %}
+        <div class="track" data-src="{{ url_for('music', filename=track) }}">
+          🎶 {{ track }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+<audio id="audio" controls style="display:none;"></audio>
+<script src="{{ url_for('static', filename='js/player.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+body {
+    background: black;
+    color: #00FF00;
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    padding: 20px;
+}
+
+/* CRT scanlines */
+body::after {
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: repeating-linear-gradient(
+        rgba(0,255,0,0.05) 0px,
+        rgba(0,255,0,0.05) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    z-index: 9999;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+.player-area {
+    flex: 1;
+}
+
+#current-track {
+    margin: 20px 0;
+    font-size: 1.2em;
+}
+
+.controls button {
+    background: black;
+    color: #00FF00;
+    border: 1px solid #00FF00;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+}
+
+.controls button:hover {
+    background: #002200;
+}
+
+.playlist-area {
+    width: 300px;
+}
+
+#search {
+    width: 100%;
+    padding: 5px;
+    background: black;
+    color: #00FF00;
+    border: 1px solid #00FF00;
+    margin-bottom: 10px;
+}
+
+.track-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.track {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.track:hover {
+    text-decoration: underline;
+}
