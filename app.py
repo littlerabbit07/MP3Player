@@ -5,7 +5,7 @@ import random
 app = Flask(__name__)
 
 # Set this to the full path of your external music folder
-MUSIC_FOLDER = "G:\Shared\#Music"  # Change this to your folder path
+MUSIC_FOLDER = r"G:\Shared\#Music"  # Use raw string to avoid escape sequence issues
 
 @app.route('/')
 def index():
