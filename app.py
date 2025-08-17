@@ -17,6 +17,8 @@ def index():
                     # Store relative path from MUSIC_FOLDER for serving
                     rel_dir = os.path.relpath(root, MUSIC_FOLDER)
                     rel_file = os.path.join(rel_dir, f) if rel_dir != '.' else f
+                    # Replace backslashes with forward slashes for URLs
+                    rel_file = rel_file.replace('\\', '/')
                     tracks.append(rel_file)
         random.shuffle(tracks)
     return render_template('index.html', tracks=tracks)
