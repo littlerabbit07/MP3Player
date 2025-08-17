@@ -5,7 +5,7 @@ import random
 app = Flask(__name__)
 
 # Set this to the full path of your external music folder
-MUSIC_FOLDER = "/home/natalia/Music"  # Change this to your folder path
+MUSIC_FOLDER = "G:\Shared\#Music"  # Change this to your folder path
 
 @app.route('/')
 def index():
@@ -27,4 +27,4 @@ def music(filename):
     return send_from_directory(MUSIC_FOLDER, filename)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
