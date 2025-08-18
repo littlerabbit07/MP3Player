@@ -4,8 +4,8 @@ import random
 
 app = Flask(__name__)
 
-# Set this to the full path of your external music folder
-MUSIC_FOLDER = r"G:\Shared\#Music"  # Use raw string to avoid escape sequence issues
+# Set this to the full path of your external music folder (Linux style)
+MUSIC_FOLDER = "/home/natalia/Music"  # Update this path as needed
 
 @app.route('/')
 def index():
@@ -17,7 +17,7 @@ def index():
                     # Store relative path from MUSIC_FOLDER for serving
                     rel_dir = os.path.relpath(root, MUSIC_FOLDER)
                     rel_file = os.path.join(rel_dir, f) if rel_dir != '.' else f
-                    # Replace backslashes with forward slashes for URLs
+                    # Replace backslashes with forward slashes for URLs (just in case)
                     rel_file = rel_file.replace('\\', '/')
                     tracks.append(rel_file)
         random.shuffle(tracks)
